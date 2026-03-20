@@ -9,11 +9,19 @@ public class Gravitation : MonoBehaviour
     // List of attractable objects
     public static List<Gravitation> otherObjectList;
 
+    [SerializeField] bool planet = false;
+    [SerializeField] float orbitSpeed = 1000f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         if (otherObjectList == null) {otherObjectList = new List<Gravitation>();}
         otherObjectList.Add(this);
+
+        if (!planet)
+        {
+            rb.AddForce(Vector3.left * orbitSpeed);
+        }
     }
     private void FixedUpdate()
     {
